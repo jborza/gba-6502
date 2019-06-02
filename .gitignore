@@ -1,0 +1,6 @@
+.vscode
+*.gba
+*.elf
+build/
+gen/*.bin
+gen/*.h
