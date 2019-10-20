@@ -46,12 +46,25 @@ int frame = 0;
 //---------------------------------------------------------------------------------
 u16 PaletteBuffer[256];
 
+void handleKeys(){
+    scanKeys();
+    u16 kDown = keysDown();
+    if (kDown & KEY_LEFT)
+        last_key = 'a';
+    else if (kDown & KEY_DOWN)
+        last_key = 's';
+    else if (kDown & KEY_RIGHT)
+        last_key = 'd';
+    else if (kDown & KEY_UP)
+        last_key = 'w';
+}
+
 //---------------------------------------------------------------------------------
 void VblankInterrupt()
 //---------------------------------------------------------------------------------
 {
     frame += 1;
-    scanKeys();
+    handleKeys();
 }
 
 void draw_memory()
@@ -93,7 +106,6 @@ int main(void)
     load_bin();
     reset_pc();
 
-    int x = 0;
     while (1)
     {
         for (int i = 0; i < 256; i++)
